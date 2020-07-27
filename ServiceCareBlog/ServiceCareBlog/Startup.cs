@@ -25,6 +25,8 @@ namespace ServiceCareBlog
             services.AddDbContext<BloggingContext>(options =>
                 options.UseSqlServer(_configuration.GetConnectionString("BlogConnectionString")));
 
+            services.AddScoped<IBloggingRepository, BloggingRepository>();
+
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
