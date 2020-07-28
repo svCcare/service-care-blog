@@ -52,5 +52,16 @@ namespace ServiceCareBlog.Controllers
             await _bloggingRepository.CreatePost(postEntity);
             return CreatedAtAction(nameof(GetPostById), new { id = postEntity.PostId }, postEntity);
         }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<Post>> DeletePostById(int id)
+        {
+            var post = _bloggingRepository.DeletePostById(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return post.Result;
+        }
     }
 }

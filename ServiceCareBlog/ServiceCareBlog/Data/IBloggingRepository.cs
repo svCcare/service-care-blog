@@ -14,6 +14,7 @@ namespace ServiceCareBlog.Data
 
         Task<int> CreatePost(Post postEntity);
 
+        Task<Post> DeletePostById(int id);
 
     }
 }

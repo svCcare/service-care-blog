@@ -18,7 +18,7 @@ namespace ServiceCareBlog.Data
         public Post GetPostById(int id)
         {
             return _bloggingContext.Posts
-                .FirstOrDefault(p => id == p.PostId);
+                .FirstOrDefault(p => p.PostId == id);
         }
 
         public IEnumerable<Post> GetAllPosts()
@@ -31,6 +31,22 @@ namespace ServiceCareBlog.Data
         {
             _bloggingContext.Posts.Add(postEntity);
             return await _bloggingContext.SaveChangesAsync();
+        }
+
+        public void DeletePost(Post post)
+        {
+            _bloggingContext.Entry(post).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            _bloggingContext.SaveChanges();
+        }
+
+        public async Task<Post> DeletePostById(int id)
+        {
+            var post = await _bloggingContext.Posts.FindAsync(id);
+
+            _bloggingContext.Posts.Remove(post);
+            await _bloggingContext.SaveChangesAsync();
+
+            return post;
         }
     }
 }
