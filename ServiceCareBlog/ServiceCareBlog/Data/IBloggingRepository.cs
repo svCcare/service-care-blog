@@ -8,6 +8,12 @@ namespace ServiceCareBlog.Data
 {
     public interface IBloggingRepository
     {
+        Post GetPostById(int id);
+
         IEnumerable<Post> GetAllPosts();
+
+        Task<int> CreatePost(Post postEntity);
+
+
     }
 }
